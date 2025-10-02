@@ -12,9 +12,12 @@ body {
   min-width: 180px;
   min-height: 180px;
   position: absolute;
-  top: 92%; /* árvore um pouco mais baixa para abrir mais espaço ao balão */
+  top: 98%; /* árvore mais baixa para abrir ainda mais espaço ao balão */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(
+    -50%,
+    -30%
+  ); /* mantém a árvore parcialmente visível mesmo sendo mais baixa */
   z-index: 2;
 }
 
@@ -86,8 +89,11 @@ body {
     font-size: clamp(0.72rem, 4vw, 0.92rem);
   }
   .tree-container {
-    top: 96%; /* versão muito estreita: árvore ainda mais baixa */
-    transform: translate(-50%, -30%); /* mantém a árvore visível */
+    top: 99%; /* versão muito estreita: árvore ainda mais baixa */
+    transform: translate(
+      -50%,
+      -20%
+    ); /* ajusta a visibilidade em telas curtas */
   }
 }
 
