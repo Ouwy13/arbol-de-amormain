@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dn Fran 🤭</title>
+    <!-- Autoria e direitos -->
+    <meta name="author" content="Zero">
+    <meta name="copyright" content="Zero - Código livre não comercial">
+    <meta name="description" content="Árvore de Amor Animada: uma surpresa interativa e romântica para dedicar à sua parceira ou pessoa querida. Código livre para uso pessoal, educativo ou de inspiração.">
+    <meta name="keywords" content="amor, surpresa, romântico, dedicatória, animação, árvore, corações, casal, aniversário, presente digital">
+    <meta name="robots" content="index, follow">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="Css/style.css">
+    <link rel="stylesheet" href="Css/style.mobile.css" media="only screen and (max-width: 600px)">
+    <style>
+      .tree-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 400px;
+        z-index: 2;
+      }
+      .animated-heart {
+        transform-origin: center;
+        animation: beat 1s infinite;
+      }
+      @keyframes beat {
+        0%, 100% { transform: scale(1); }
+        20% { transform: scale(1.1); }
+        40% { transform: scale(0.95); }
+        60% { transform: scale(1.08); }
+        80% { transform: scale(1); }
+      }
+    </style>
+</head>
+<body>
+    <!-- Adicionado botão inicial e container de corações -->
+    <div id="start-screen">
+      <button id="start-btn">click para continuar 💫</button>
+    </div>
+    <div class="hearts-container" id="hearts-container"></div>
+    <!-- </CHANGE> -->
+    <div id="floating-objects"></div>
+    <div class="dedication-text" id="dedication-text">
+      <div class="signature" id="signature"></div>
+    </div>
+    <div class="tree-container" id="tree-container"></div>
+    <audio src="Arbol_De_Amor-main/Music/music3.mp3" id="bg-music" preload="auto"></audio>
+    <script src="Js/script.js"></script>
+</body>
+</html>
