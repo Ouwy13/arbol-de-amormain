@@ -241,37 +241,46 @@ function loadAndAnimateTree() {
 function showDedicationText() {
   let text = getURLParam("text")
   if (!text) {
-    text = `No fundo, só queria um sentimento recíproco, um passo simples de amizade até amor.
-Mas contigo encontrei algo que nem toda reciprocidade do mundo ousaria alcançar.
-Uma riqueza rara, como achar um rubi perdido em meio à imensidão.
+    text = `No fundo, eu só queria um sentimento recíproco, um passo simples que fosse de amizade até amor.
+Entretanto, contigo encontrei algo que nem toda reciprocidade do mundo ousaria alcançar:
+uma riqueza rara, como achar um rubi perdido em meio à imensidão.
 
-Encontrei um coração que teme a Deus, que ora por mim, que fala com o céu sobre minhas causas.
-Tem algo mais prazeroso do que saber que alguém se ajoelha e lembra de mim diante d'Ele?
-Convicção que aquece minha alma.
+Pois encontrei um coração que teme a Deus, que ora por mim, que fala com o céu sobre minhas causas.
+E, afinal, existe algo mais prazeroso do que saber que alguém se ajoelha e lembra de mim diante d’Ele?
+Essa convicção aquece a minha alma.
 
 Só Deus sabe o quanto isso se tornou vital.
-Gratidão minha, impossível de traduzir em palavras.
-Fran, talvez eu não tenha deixado claro o suficiente.
+Minha gratidão é tamanha que se torna impossível traduzi-la em palavras.
+Fran, talvez eu não tenha deixado claro o suficiente…
 
-Mas seria pedir demais... querer você pelo resto da vida?
+Mas seria pedir demais querer você pelo resto da vida?
 
-Ok, ok, ok , já sei, acabei saindo da margem da folha.
+Ok, ok, ok, já sei: acabei saindo da margem da folha.
+Mas é que você me dá essa vontade insana de querer ver os próximos capítulos.
 
-Só que você me dá essa vontade insana de querer ver os próximos capítulos.
-
-Você desperta em mim a mais paradoxal e violenta vontade de escrever poesias de amor.
+Assim, você desperta em mim a mais paradoxal e violenta vontade de escrever poesias de amor.
 Acordo e penso: mais um dia, mais uma chance de esperar sua mensagem,
-e me apaixonar outra vez, só porque você é você.
+e me apaixonar outra vez — só porque você é você.
 
-Mania do poeta: inventar razões pra poetizar, rabiscando versos em cadernos, esperando o nome certo para dedicar.
+É mania de poeta inventar razões para poetizar,
+rabiscando versos em cadernos, esperando o nome certo para dedicar.
 
-Inocentemente percebi,
+E, inocentemente, percebi:
 você é a maior loucura que ousei desejar na minha vida.
 
-Eu era eu, até você chegar.
-E desde então, eu já não sei.
+Eu era eu… até você chegar.
+E, desde então, já não sei mais.
 
-Desculpe o exageiro, mas não sei sentir pouco..`
+Você é a razão da minha loucura, e a saudade diária do seu sorriso é absurda.
+
+Na real, você é um belo de um absurdo.
+É a junção de todos os fatores que altera qualquer que seja o produto.
+
+E, se nossas histórias se entrelaçarem como versos num mesmo poema, quero que saiba:
+não é só a loucura que me prende a você, mas também a paz escondida no seu olhar.
+Porque amor não é apenas fogo, é também abrigo.
+E, no meio da tempestade que você desperta em mim, descobri que é ao seu lado que eu gostaria de aprender a calma,
+de viver os dias simples, de transformar o sempre em eternidade.`
   } else {
     text = decodeURIComponent(text).replace(/\\n/g, "\n")
   }
