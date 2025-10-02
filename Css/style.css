@@ -7,6 +7,33 @@ body {
   background: #fcfcfc;
 }
 
+/* overlay rosa difusa de fundo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0; /* deve ficar atrás dos elementos que têm z-index >= 1 */
+  background: radial-gradient(
+    ellipse at 10% 10%,
+    rgba(230, 0, 38, 0.09) 0%,
+    rgba(230, 0, 38, 0.05) 20%,
+    rgba(255, 255, 255, 0) 45%
+  );
+  filter: blur(40px);
+  transform: translateZ(0);
+}
+
+/* reduzir opacidade do start-screen para deixar o desfoque visível */
+#start-screen {
+  background: rgba(
+    255,
+    245,
+    249,
+    0.66
+  ); /* rosa muito suave + semitransparente */
+}
+
 /* Estilos para tela inicial e botão de início */
 #start-screen {
   position: fixed;
