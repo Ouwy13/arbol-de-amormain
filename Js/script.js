@@ -277,12 +277,17 @@ Desculpe o exageiro, mas não sei sentir pouco..`
   }
   const container = document.getElementById("dedication-text")
   container.classList.add("typing")
+
+  // CONFIG: ajuste esses valores para alterar a velocidade
+  const TYPING_SPEED = 10   // ms por caractere (menor = mais rápido)
+  const NEWLINE_DELAY = 150 // ms extra após '\n'
+
   let i = 0
   function type() {
     if (i <= text.length) {
       container.textContent = text.slice(0, i)
       i++
-      setTimeout(type, text[i - 2] === "\n" ? 150 : 15)
+      setTimeout(type, text[i - 2] === "\n" ? NEWLINE_DELAY : TYPING_SPEED)
     }
   }
   type()
