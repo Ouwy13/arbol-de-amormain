@@ -4,20 +4,21 @@ body {
   font-size: 16px;
 }
 
-/* Árvore: posicionada junto à borda inferior (alinhada ao botão de música) */
+/* Reposicionando árvore mais baixa para dar destaque ao balão da carta */
 .tree-container {
-  width: 92vw !important;
-  height: 62vw !important;
-  max-width: 98vw;
-  max-height: 80vw;
-  min-width: 160px;
-  min-height: 140px;
-  position: fixed; /* fixa em relação à viewport */
-  bottom: 18px; /* mesma altura do #music-btn (botão de música) */
+  width: clamp(280px, 85vw, 420px) !important;
+  height: clamp(
+    200px,
+    38vh,
+    340px
+  ) !important; /* árvore menor para dar espaço ao balão */
+  position: fixed;
+  bottom: clamp(20px, 3vh, 40px); /* árvore mais baixa na tela */
   left: 50%;
-  transform: translateX(-50%); /* centraliza horizontalmente */
-  z-index: 10; /* abaixo do botão de música (que tem z-index:99) */
+  transform: translateX(-50%);
+  z-index: 10;
 }
+/* </CHANGE> */
 
 .tree-container svg {
   width: 100%;
@@ -25,39 +26,41 @@ body {
   display: block;
 }
 
-/* Ajuste extra da animação da SVG para mobile (mais deslocamento vertical) */
+/* Animação ajustada para manter árvore visível e baixa */
 .tree-container svg.move-and-scale {
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
-  transform: translateY(140px) scale(1.18); /* maior deslocamento para encaixar com o balão */
+  transform: translateY(clamp(20px, 4vh, 40px)) scale(1.12); /* movimento sutil para baixo */
 }
+/* </CHANGE> */
 
-/* Balão centralizado acima da árvore no mobile, responsivo e com animação subindo */
+/* Balão da carta com mais espaço e destaque visual */
 .dedication-text {
   position: absolute;
   left: 50%;
-  top: 4%; /* começa bem no topo da área visível */
-  transform: translateX(-50%) translateY(28px); /* início levemente abaixo para animação subir */
-  width: 96vw; /* ocupa quase toda a largura do dispositivo */
-  max-width: 96vw;
+  top: clamp(12px, 2%, 20px); /* mais próximo do topo */
+  transform: translateX(-50%) translateY(0);
+  width: 94vw;
+  max-width: 94vw;
   box-sizing: border-box;
-  font-size: clamp(0.78rem, 3.6vw, 1rem);
+  font-size: clamp(0.8rem, 3.8vw, 1.05rem);
   text-align: left;
   color: #000;
   font-family: "Courier New", Courier, monospace;
   white-space: pre-line;
-  z-index: 15; /* acima da árvore */
+  z-index: 15;
   opacity: 0;
   pointer-events: none;
-  line-height: 1.5;
-  max-height: 60vh; /* ocupa a maior parte superior sem alcançar a árvore (árvore em top:88%) */
+  line-height: 1.6;
+  max-height: clamp(280px, 52vh, 500px); /* mais espaço para o texto */
   overflow-y: auto;
-  padding: 1rem;
+  padding: clamp(0.9rem, 3vw, 1.3rem);
   background: rgba(255, 255, 255, 0.97);
-  border-radius: 14px;
-  box-shadow: 0 12px 48px rgba(230, 0, 38, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(230, 0, 38, 0.14);
   transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.29, 1), opacity 0.45s;
-  margin: 0 6px;
+  margin: 0 clamp(4px, 2vw, 10px);
 }
+/* </CHANGE> */
 
 /* Animação: sobe ao surgir (aparência vindo de baixo pra cima) */
 .dedication-text.typing {
@@ -78,19 +81,48 @@ body {
   }
 }
 
-/* Ajustes para telas muito estreitas ou com pouca altura disponível */
+/* Ajustes para telas pequenas mantendo hierarquia visual */
 @media (max-width: 420px), (max-height: 640px) {
   .dedication-text {
-    top: 3%;
-    max-height: 56vh;
-    padding: 0.8rem;
-    font-size: clamp(0.72rem, 4vw, 0.92rem);
+    top: clamp(8px, 1.5%, 16px);
+    max-height: clamp(240px, 48vh, 420px);
+    padding: clamp(0.75rem, 2.5vw, 1rem);
+    font-size: clamp(0.75rem, 4vw, 0.95rem);
   }
   .tree-container {
-    bottom: 16px; /* pequeno ajuste em telas muito pequenas */
-    transform: translateX(-50%);
+    height: clamp(180px, 35vh, 300px) !important;
+    bottom: clamp(16px, 2.5vh, 32px);
+  }
+  .tree-container svg.move-and-scale {
+    transform: translateY(clamp(16px, 3vh, 32px)) scale(1.08);
   }
 }
+
+/* Ajustes para telas altas (mais espaço vertical disponível) */
+@media (min-height: 800px) and (max-width: 600px) {
+  .tree-container {
+    height: clamp(220px, 40vh, 360px) !important;
+    bottom: clamp(24px, 3.5vh, 48px);
+  }
+  .dedication-text {
+    max-height: clamp(320px, 55vh, 540px);
+    padding: clamp(1rem, 3.2vw, 1.4rem);
+  }
+}
+
+/* Ajustes para telas muito estreitas (proporção vertical) */
+@media (max-width: 360px) {
+  .dedication-text {
+    font-size: clamp(0.72rem, 4.2vw, 0.88rem);
+    padding: clamp(0.7rem, 2.2vw, 0.9rem);
+    max-height: clamp(220px, 46vh, 400px);
+  }
+  .tree-container {
+    width: clamp(260px, 88vw, 380px) !important;
+    height: clamp(170px, 33vh, 280px) !important;
+  }
+}
+/* </CHANGE> */
 
 /* alinhamento da assinatura */
 .signature {
