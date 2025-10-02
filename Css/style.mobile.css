@@ -1,24 +1,28 @@
+@@ -1,97 +1,103 @@
 /*© Zero - Código livre não comercial*/
 
 body {
   font-size: 16px;
 }
 
-/* Reposicionando árvore mais baixa para dar destaque ao balão da carta */
 .tree-container {
-  width: clamp(280px, 85vw, 420px) !important;
-  height: clamp(
-    200px,
-    38vh,
-    340px
-  ) !important; /* árvore menor para dar espaço ao balão */
-  position: fixed;
-  bottom: clamp(20px, 3vh, 40px); /* árvore mais baixa na tela */
+  width: 92vw !important;
+  height: 62vw !important;
+  max-width: 98vw;
+  max-height: 80vw;
+  min-width: 180px;
+  min-height: 180px;
+  position: absolute;
+  top: 92%; /* árvore um pouco mais baixa para abrir mais espaço ao balão */
+  top: 98%; /* árvore mais baixa para abrir ainda mais espaço ao balão */
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+  transform: translate(-50%, -50%);
+  transform: translate(
+    -50%,
+    -30%
+  ); /* mantém a árvore parcialmente visível mesmo sendo mais baixa */
+  z-index: 2;
 }
-/* </CHANGE> */
 
 .tree-container svg {
   width: 100%;
@@ -26,41 +30,39 @@ body {
   display: block;
 }
 
-/* Animação ajustada para manter árvore visível e baixa */
+/* Ajuste extra da animação da SVG para mobile (mais deslocamento vertical) */
 .tree-container svg.move-and-scale {
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
-  transform: translateY(clamp(20px, 4vh, 40px)) scale(1.12); /* movimento sutil para baixo */
+  transform: translateY(140px) scale(1.18); /* maior deslocamento para encaixar com o balão */
 }
-/* </CHANGE> */
 
-/* Balão da carta com mais espaço e destaque visual */
+/* Balão centralizado acima da árvore no mobile, responsivo e com animação subindo */
 .dedication-text {
   position: absolute;
   left: 50%;
-  top: clamp(12px, 2%, 20px); /* mais próximo do topo */
-  transform: translateX(-50%) translateY(0);
-  width: 94vw;
-  max-width: 94vw;
+  top: 4%; /* começa bem no topo da área visível */
+  transform: translateX(-50%) translateY(28px); /* início levemente abaixo para animação subir */
+  width: 96vw; /* ocupa quase toda a largura do dispositivo */
+  max-width: 96vw;
   box-sizing: border-box;
-  font-size: clamp(0.8rem, 3.8vw, 1.05rem);
+  font-size: clamp(0.78rem, 3.6vw, 1rem);
   text-align: left;
   color: #000;
   font-family: "Courier New", Courier, monospace;
   white-space: pre-line;
-  z-index: 15;
+  z-index: 15; /* acima da árvore */
   opacity: 0;
   pointer-events: none;
-  line-height: 1.6;
-  max-height: clamp(280px, 52vh, 500px); /* mais espaço para o texto */
+  line-height: 1.5;
+  max-height: 60vh; /* ocupa a maior parte superior sem alcançar a árvore (árvore em top:88%) */
   overflow-y: auto;
-  padding: clamp(0.9rem, 3vw, 1.3rem);
+  padding: 1rem;
   background: rgba(255, 255, 255, 0.97);
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(230, 0, 38, 0.14);
+  border-radius: 14px;
+  box-shadow: 0 12px 48px rgba(230, 0, 38, 0.12);
   transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.29, 1), opacity 0.45s;
-  margin: 0 clamp(4px, 2vw, 10px);
+  margin: 0 6px;
 }
-/* </CHANGE> */
 
 /* Animação: sobe ao surgir (aparência vindo de baixo pra cima) */
 .dedication-text.typing {
@@ -81,48 +83,24 @@ body {
   }
 }
 
-/* Ajustes para telas pequenas mantendo hierarquia visual */
+/* Ajustes para telas muito estreitas ou com pouca altura disponível */
 @media (max-width: 420px), (max-height: 640px) {
   .dedication-text {
-    top: clamp(8px, 1.5%, 16px);
-    max-height: clamp(240px, 48vh, 420px);
-    padding: clamp(0.75rem, 2.5vw, 1rem);
-    font-size: clamp(0.75rem, 4vw, 0.95rem);
+    top: 3%;
+    max-height: 56vh;
+    padding: 0.8rem;
+    font-size: clamp(0.72rem, 4vw, 0.92rem);
   }
   .tree-container {
-    height: clamp(180px, 35vh, 300px) !important;
-    bottom: clamp(16px, 2.5vh, 32px);
-  }
-  .tree-container svg.move-and-scale {
-    transform: translateY(clamp(16px, 3vh, 32px)) scale(1.08);
-  }
-}
-
-/* Ajustes para telas altas (mais espaço vertical disponível) */
-@media (min-height: 800px) and (max-width: 600px) {
-  .tree-container {
-    height: clamp(220px, 40vh, 360px) !important;
-    bottom: clamp(24px, 3.5vh, 48px);
-  }
-  .dedication-text {
-    max-height: clamp(320px, 55vh, 540px);
-    padding: clamp(1rem, 3.2vw, 1.4rem);
+    top: 96%; /* versão muito estreita: árvore ainda mais baixa */
+    transform: translate(-50%, -30%); /* mantém a árvore visível */
+    top: 99%; /* versão muito estreita: árvore ainda mais baixa */
+    transform: translate(
+      -50%,
+      -20%
+    ); /* ajusta a visibilidade em telas curtas */
   }
 }
-
-/* Ajustes para telas muito estreitas (proporção vertical) */
-@media (max-width: 360px) {
-  .dedication-text {
-    font-size: clamp(0.72rem, 4.2vw, 0.88rem);
-    padding: clamp(0.7rem, 2.2vw, 0.9rem);
-    max-height: clamp(220px, 46vh, 400px);
-  }
-  .tree-container {
-    width: clamp(260px, 88vw, 380px) !important;
-    height: clamp(170px, 33vh, 280px) !important;
-  }
-}
-/* </CHANGE> */
 
 /* alinhamento da assinatura */
 .signature {
