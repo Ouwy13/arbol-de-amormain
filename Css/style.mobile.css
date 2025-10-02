@@ -1,28 +1,28 @@
-@@ -1,97 +1,103 @@
 /*© Zero - Código livre não comercial*/
 
 body {
   font-size: 16px;
 }
 
+/* Ajustando árvore para aparecer completamente em todas as telas mobile */
+/* Árvore: posicionada de forma responsiva para sempre aparecer por completo */
 .tree-container {
-  width: 92vw !important;
-  height: 62vw !important;
-  max-width: 98vw;
-  max-height: 80vw;
-  min-width: 180px;
-  min-height: 180px;
-  position: absolute;
-  top: 92%; /* árvore um pouco mais baixa para abrir mais espaço ao balão */
-  top: 98%; /* árvore mais baixa para abrir ainda mais espaço ao balão */
+  /* Mantém centralização horizontal; posiciona o contêiner o mais baixo possível */
+  width: clamp(220px, 92vw, 420px) !important;
+  height: clamp(110px, 30vh, 300px) !important; /* sem alteração de tamanho */
+  max-width: 95vw;
+  max-height: 40vh;
+  min-width: 160px;
+  min-height: 100px;
+  position: fixed;
+  /* bottom ajustado para o mais baixo possível (respeitando safe-area) */
+  bottom: env(safe-area-inset-bottom, 0px);
   left: 50%;
-  transform: translate(-50%, -50%);
-  transform: translate(
-    -50%,
-    -30%
-  ); /* mantém a árvore parcialmente visível mesmo sendo mais baixa */
-  z-index: 2;
+  transform: translateX(-50%);
+  z-index: 10; /* abaixo do balão (z-index:15) */
+  pointer-events: none;
 }
+/* </CHANGE> */
 
 .tree-container svg {
   width: 100%;
@@ -30,19 +30,24 @@ body {
   display: block;
 }
 
-/* Ajuste extra da animação da SVG para mobile (mais deslocamento vertical) */
+/* Ajustando animação para não empurrar a árvore para fora da tela */
+/* Animação da SVG reduzida para manter a árvore visível */
 .tree-container svg.move-and-scale {
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
-  transform: translateY(140px) scale(1.18); /* maior deslocamento para encaixar com o balão */
+  /* move a árvore visualmente para baixo dentro do container sem alterar escala */
+  transform: translateY(clamp(48px, 14vh, 160px)) scale(1.02);
+  will-change: transform;
 }
+/* </CHANGE> */
 
-/* Balão centralizado acima da árvore no mobile, responsivo e com animação subindo */
+/* Ajustando balão para não sobrepor a árvore */
+/* Balão centralizado acima da árvore no mobile, com altura ajustada */
 .dedication-text {
   position: absolute;
   left: 50%;
-  top: 4%; /* começa bem no topo da área visível */
-  transform: translateX(-50%) translateY(28px); /* início levemente abaixo para animação subir */
-  width: 96vw; /* ocupa quase toda a largura do dispositivo */
+  top: 4%;
+  transform: translateX(-50%) translateY(28px);
+  width: 96vw;
   max-width: 96vw;
   box-sizing: border-box;
   font-size: clamp(0.78rem, 3.6vw, 1rem);
@@ -50,19 +55,24 @@ body {
   color: #000;
   font-family: "Courier New", Courier, monospace;
   white-space: pre-line;
-  z-index: 15; /* acima da árvore */
+  z-index: 15;
   opacity: 0;
   pointer-events: none;
   line-height: 1.5;
-  max-height: 60vh; /* ocupa a maior parte superior sem alcançar a árvore (árvore em top:88%) */
+  /* Aumenta o espaço vertical disponível para o balão mantendo responsividade.
+     Usa clamp para adaptar em diferentes alturas e garante um gap para a árvore. */
+  max-height: clamp(42vh, 48vh, 60vh);
   overflow-y: auto;
-  padding: 1rem;
+  padding: clamp(0.9rem, 2.8vw, 1.2rem);
   background: rgba(255, 255, 255, 0.97);
   border-radius: 14px;
   box-shadow: 0 12px 48px rgba(230, 0, 38, 0.12);
   transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.29, 1), opacity 0.45s;
   margin: 0 6px;
+  /* espaço mínimo entre o balão e a base (árvore) para evitar sobreposição visual */
+  margin-bottom: clamp(12px, 3.5vh, 36px);
 }
+/* </CHANGE> */
 
 /* Animação: sobe ao surgir (aparência vindo de baixo pra cima) */
 .dedication-text.typing {
@@ -83,22 +93,56 @@ body {
   }
 }
 
+/* Ajustes específicos para telas muito pequenas ou com pouca altura */
 /* Ajustes para telas muito estreitas ou com pouca altura disponível */
 @media (max-width: 420px), (max-height: 640px) {
   .dedication-text {
     top: 3%;
-    max-height: 56vh;
-    padding: 0.8rem;
-    font-size: clamp(0.72rem, 4vw, 0.92rem);
+    /* aumenta a altura possível do balão em mobile, sem tocar a árvore devido ao gap */
+    max-height: clamp(36vh, 44vh, 56vh);
+    padding: clamp(0.75rem, 2.5vw, 1rem);
+    font-size: clamp(0.7rem, 4vw, 0.92rem);
+    margin-bottom: clamp(10px, 3vh, 30px);
   }
   .tree-container {
-    top: 96%; /* versão muito estreita: árvore ainda mais baixa */
-    transform: translate(-50%, -30%); /* mantém a árvore visível */
-    top: 99%; /* versão muito estreita: árvore ainda mais baixa */
-    transform: translate(
-      -50%,
-      -20%
-    ); /* ajusta a visibilidade em telas curtas */
+    /* manter mesmo tamanho, ancorada ao fundo */
+    height: clamp(110px, 28vh, 260px) !important;
+    max-height: 38vh !important;
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tree-container svg.move-and-scale {
+    transform: translateY(clamp(54px, 16vh, 140px)) scale(1.01);
+  }
+}
+
+/* Ajuste para telas muito estreitas */
+@media (max-width: 360px) {
+  .dedication-text {
+    font-size: clamp(0.72rem, 4.2vw, 0.88rem);
+    padding: clamp(0.7rem, 2.2vw, 0.9rem);
+    /* ligeiro ajuste para telas muito pequenas, evitando cortar a árvore */
+    max-height: clamp(34vh, 42vh, 52vh);
+    margin-bottom: clamp(10px, 3vh, 28px);
+  }
+  .tree-container {
+    width: clamp(200px, 94vw, 360px) !important;
+    height: clamp(96px, 26vh, 220px) !important;
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tree-container svg.move-and-scale {
+    transform: translateY(clamp(56px, 18vh, 140px)) scale(1);
+  }
+}
+
+/* Ajuste para telas altas / phablets */
+@media (min-height: 800px) and (max-width: 600px) {
+  .tree-container {
+    height: clamp(140px, 34vh, 340px) !important;
+    max-height: 46vh !important;
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .tree-container svg.move-and-scale {
+    transform: translateY(clamp(60px, 18vh, 160px)) scale(1.03);
   }
 }
 
