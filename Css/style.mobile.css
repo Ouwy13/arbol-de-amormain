@@ -4,21 +4,19 @@ body {
   font-size: 16px;
 }
 
+/* Árvore: posicionada junto à borda inferior (alinhada ao botão de música) */
 .tree-container {
   width: 92vw !important;
   height: 62vw !important;
   max-width: 98vw;
   max-height: 80vw;
-  min-width: 180px;
-  min-height: 180px;
-  position: absolute;
-  top: 98%; /* árvore mais baixa para abrir ainda mais espaço ao balão */
+  min-width: 160px;
+  min-height: 140px;
+  position: fixed; /* fixa em relação à viewport */
+  bottom: 18px; /* mesma altura do #music-btn (botão de música) */
   left: 50%;
-  transform: translate(
-    -50%,
-    -30%
-  ); /* mantém a árvore parcialmente visível mesmo sendo mais baixa */
-  z-index: 2;
+  transform: translateX(-50%); /* centraliza horizontalmente */
+  z-index: 10; /* abaixo do botão de música (que tem z-index:99) */
 }
 
 .tree-container svg {
@@ -89,11 +87,8 @@ body {
     font-size: clamp(0.72rem, 4vw, 0.92rem);
   }
   .tree-container {
-    top: 99%; /* versão muito estreita: árvore ainda mais baixa */
-    transform: translate(
-      -50%,
-      -20%
-    ); /* ajusta a visibilidade em telas curtas */
+    bottom: 16px; /* pequeno ajuste em telas muito pequenas */
+    transform: translateX(-50%);
   }
 }
 
