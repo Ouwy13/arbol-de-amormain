@@ -255,7 +255,7 @@ Fran, talvez eu não tenha deixado claro o suficiente…
 
 Mas seria pedir demais querer você pelo resto da vida?
 
-Ok, ok, ok, já sei: acabei saindo da margem da folha.
+Ok, ok, ok, já sei: acabei saindo da margem da linha.
 Mas é que você me dá essa vontade insana de querer ver os próximos capítulos.
 
 Assim, você desperta em mim a mais paradoxal e violenta vontade de escrever poesias de amor.
